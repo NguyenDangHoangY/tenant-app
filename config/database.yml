@@ -1,3 +1,5 @@
+
+
 # PostgreSQL. Versions 9.3 and up are supported.
 #
 # Install the pg driver:
@@ -23,16 +25,20 @@ default: &default
 
 development:
   <<: *default
-  database: tenantmultidb_development
+  database: tenantmultidb
+  primary_peter:
+  <<: *default
+  database: tenantmultidb_peter_development
+  migrations_paths: db/tenants_migrations
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: tenantmultidb
+  username: postgres
 
   # The password associated with the postgres role (username).
-  #password:
+  password: Ynhune2001270499@
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -58,6 +64,8 @@ development:
 test:
   <<: *default
   database: tenantmultidb_test
+  username: postgres
+  password: Ynhune2001270499@
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,7 +88,14 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  # adapter: postgresql
+  # encoding: unicode
+  # # For details on connection pooling, see Rails configuration guide# https://guides.rubyonrails.org/configuring.html#database-
+  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # database: sample_app_production
+  # username: postgres
+  # password: Ynhune2001270499@
   <<: *default
   database: tenantmultidb_production
-  username: tenantmultidb
-  password: <%= ENV["TENANTMULTIDB_DATABASE_PASSWORD"] %>
+  username: postgres
+  password: Ynhune2001270499@
