@@ -1,9 +1,13 @@
 class ArticlesController < ApplicationController
+  include Tenantable
   before_action :set_article, only: %i[ show edit update destroy ]
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
+    # @articles = Article.all
+    read_with_tenant do
+      @articles = Article.all
+    end
   end
 
   # GET /articles/1 or /articles/1.json
@@ -21,7 +25,11 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    @article = Article.new(article_params)
+    # @article = Article.new(article_params)
+    write_with_tenant do
+      @article = Article.create(article_params)
+      # @article.save
+    end
 
     respond_to do |format|
       if @article.save

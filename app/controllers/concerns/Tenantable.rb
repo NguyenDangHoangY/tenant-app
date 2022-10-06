@@ -10,4 +10,12 @@ module Tenantable
         block.call
       end
     end
+
+    def write_with_tenant(&block)
+        author = Author.find_by!(slug: request.subdomain)
+      
+        ActiveRecord::Base.connected_to(role: :writing, shard: author.slug.to_sym) do
+          block.call
+        end
+    end
 end

@@ -1,2 +1,2 @@
-class Article < PrimaryPeterRecord
+class Article < ApplicationRecord
 end
